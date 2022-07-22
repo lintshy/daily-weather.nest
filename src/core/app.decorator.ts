@@ -1,5 +1,10 @@
-import { applyDecorators, Header } from "@nestjs/common"
+import { applyDecorators, Header, UseInterceptors } from "@nestjs/common"
 
-export function DWHeaders() {
-  return applyDecorators(Header("test-header", "test-value"))
+import { LoggingInterceptor } from "./app.interceptor"
+
+export function DWPreset() {
+  return applyDecorators(
+    Header("test-header", "test-value"),
+    UseInterceptors(LoggingInterceptor)
+  )
 }
